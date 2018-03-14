@@ -1,18 +1,62 @@
 // DO WHATEVER YOU WANT HERE
 
-const createEnumerableProperty = () => {};
-const createNotEnumerableProperty = () => {};
-const createProtoMagicObject = () => {};
-const incrementor = () => {};
+const createEnumerableProperty = property => {
+  /*Object.defineProperty(Object.prototype, property, {
+
+configurable: true,
+writable: true,
+enumerable: true,
+});*/
+
+   property;
+};
+const createNotEnumerableProperty = property => {
+  Object.defineProperty(Object.prototype, property, {
+    value: 'value',
+  // writable: true, // так не работает
+   configurable: true,
+    enumerable: false,
+
+  });
+    return property;
+};
+
+
+const createProtoMagicObject = () => {
+  var protoMagicObject = new Function();
+  return Function;
+};
+let increment = 0;
+Function.prototype.valueOf = () => increment;
+const incrementor = () => {increment ++;
+  return incrementor;
+};
+let asyncInc = 0;
+
 const asyncIncrementor = () => {};
 const createIncrementer = () => {};
 
 // return same argument not earlier than in one second, and not later, than in two
-const returnBackInSecond = () => {};
-const getDeepPropertiesCount = () => {};
-const createSerializedObject = () => {};
+const returnBackInSecond = (arg) => {
+	return promise = new Promise((resolve) => {setTimeout(() => {resolve(arg);}, 1000)})
+};
+const getDeepPropertiesCount = obj => {
+
+};
+//Object.getOwnPropertyNames возвращает все свойства, в т.ч. not enumerable
+
+const createSerializedObject = () => {
+	return new String(JSON.parse(JSON.stringify(Object.prototype)));
+};
 const toBuffer = () => {};
-const sortByProto = () => {};
+const sortByProto = array => {
+  array.sort(
+    (a, b) => {
+    return a.__proto__ - b.__proto__;
+  }
+)
+  return array;
+};
 
 exports.createEnumerableProperty = createEnumerableProperty;
 exports.createNotEnumerableProperty = createNotEnumerableProperty;
