@@ -40,10 +40,18 @@ const createIncrementer = () => {};
 const returnBackInSecond = (arg) => {
 	return promise = new Promise((resolve) => {setTimeout(() => {resolve(arg);}, 1000)})
 };
-const getDeepPropertiesCount = obj => {
+const getDeepPropertiesCount = (obj) => {
+    let counter = Object.getOwnPropertyNames(obj).length;
 
+    Object.getOwnPropertyNames(obj).forEach(property => {
+        if (Object.getOwnPropertyNames(obj[property]).length > 0){
+            counter += getDeepPropertiesCount(obj[property]);
+        }
+    })
+    return counter;
 };
-//Object.getOwnPropertyNames возвращает все свойства, в т.ч. not enumerable
+
+
 
 const createSerializedObject = () => {
 	return new String(JSON.parse(JSON.stringify(Object.prototype)));
